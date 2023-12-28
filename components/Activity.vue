@@ -47,62 +47,67 @@
         const lastIndex = envelope_xdrs.length - 1;
 
         // Loop through the entire array of envelope_xdrs
-        for (const envelope_xdr of envelope_xdrs.slice(0, lastIndex)) {
-            const transaction = new Transaction(envelope_xdr, Networks.TESTNET);
+        if(envelope_xdrs.length > 1){
+            for (const envelope_xdr of envelope_xdrs.slice(0, lastIndex)) {
+                const transaction = new Transaction(envelope_xdr, Networks.TESTNET);
 
-            console.log(transaction);
-            // Get the transaction's date
-            const date = transaction.timeBounds?.maxTime
-            ? new Date(parseInt(transaction.timeBounds.maxTime) * 1000)
-            : new Date();
+                console.log(transaction);
+                // Get the transaction's date
+                const date = transaction.timeBounds?.maxTime
+                ? new Date(parseInt(transaction.timeBounds.maxTime) * 1000)
+                : new Date();
 
-            // Get the source account and if it's the name that the user enter, replace it
-            let sourceAccountTransaction;
+                // Get the source account and if it's the name that the user enter, replace it
+                let sourceAccountTransaction;
 
-            if(transaction.source != publicKey){
-                sourceAccountTransaction = transaction.source;
-            }else{
-                sourceAccountTransaction = name;
-            }
-                
-            // Get the source destination and if it's the name that the user enter, replace it
-            const operation = transaction.operations[0];
-            let sourceDestinationTransaction: any;
-
-            if (operation.type === 'payment') {
-                if(operation.destination != publicKey){
-                    sourceDestinationTransaction = operation.destination;
+                if(transaction.source != publicKey){
+                    sourceAccountTransaction = transaction.source;
                 }else{
-                        sourceDestinationTransaction = name;
+                    sourceAccountTransaction = name;
+                }
+                    
+                // Get the source destination and if it's the name that the user enter, replace it
+                const operation = transaction.operations[0];
+                let sourceDestinationTransaction: any;
+
+                if (operation.type === 'payment') {
+                    if(operation.destination != publicKey){
+                        sourceDestinationTransaction = operation.destination;
+                    }else{
+                            sourceDestinationTransaction = name;
+                    }
+                }
+
+                // Get the transaction's fee
+                const operationFeeTransaction = transaction.operations[0];
+
+                let operationFee: string | undefined;
+
+                if (operationFeeTransaction.type === 'payment') {
+                    operationFee = operationFeeTransaction.amount;
+                } else {
+                    operationFee = undefined;
+                }
+
+                //All the data insdie the array
+                activityArray.value.push({
+                    sourceAccount: sourceAccountTransaction,
+                    sourceDestination: sourceDestinationTransaction,
+                    amount: operationFee,
+                    date: date,
+                });
+
+                // Display block to activity element
+                const activityDiv = document.getElementById("activity");
+
+                if (activityDiv) {
+                    activityDiv.style.display = "block";
                 }
             }
-
-            // Get the transaction's fee
-            const operationFeeTransaction = transaction.operations[0];
-
-            let operationFee: string | undefined;
-
-            if (operationFeeTransaction.type === 'payment') {
-                operationFee = operationFeeTransaction.amount;
-            } else {
-                operationFee = undefined;
-            }
-
-            //All the data insdie the array
-            activityArray.value.push({
-                sourceAccount: sourceAccountTransaction,
-                sourceDestination: sourceDestinationTransaction,
-                amount: operationFee,
-                date: date,
-            });
-
-            // Display block to activity element
-            const activityDiv = document.getElementById("activity");
-
-            if (activityDiv) {
-                activityDiv.style.display = "block";
-            }
+        }else {
+            alert("This account has no transactions!");
         }
+
     }
 
     
