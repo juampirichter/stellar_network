@@ -1,7 +1,7 @@
 Step by step:
 1- Install Node.js in your computer (Recommended version).
 
-2- Create a main folder and inside create one called 'stellar_network', open the VSCode in the folder 'stellar_network' and create a new terminal. 
+2- Create a main folder and inside create one called 'stellar_network', open the VSCode in the folder 'stellar_network' and create a new terminal.
 
 3- Type 'cd ..' then 'npm init vite' and in Proyect Name put 'stellar_network'. Select 'Vue' and 'Typescript'.
 
@@ -11,7 +11,7 @@ Step by step:
 
 6- Now to install Quasar, put in the terminal 'npm install --save quasar @quasar/extras' and then 'npm install --save-dev @quasar/vite-plugin sass@^1.33.0'
 
-7- Go to the main.ts file and under 'import App from "./App.vue"', put 
+7- Go to the main.ts file and under 'import App from "./App.vue"', put
     import { Quasar } from 'quasar'
     import '@quasar/extras/material-icons/material-icons.css'
     import '@quasar/extras/fontawesome-v6/fontawesome-v6.css'
@@ -24,7 +24,7 @@ Step by step:
         })
         .mount('#app')
 
-9- Go back to the vite.config.ts file and import the following line: 
+9- Go back to the vite.config.ts file and import the following line:
     import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
 And in the plugins part, replace with the following:
     plugins: [
