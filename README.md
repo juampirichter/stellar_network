@@ -7,7 +7,7 @@ Step by step:
 
 4- After installing Vue and Typescript, type 'cd stellar_network' and 'npm init -y' in the terminal. Then 'npm install'.
 
-5- Go to the vite.config.ts file, remove the ',' at the end of 'plugins: [vue()]'. Then above plugins and put 'server: {open: true},'
+5- Go to the vite.config.ts file, remove the ',' at the end of 'plugins: [vue()]'. Then above plugins put 'server: {open: true},'
 
 6- Now to install Quasar, put in the terminal 'npm install --save quasar @quasar/extras' and then 'npm install --save-dev @quasar/vite-plugin sass@^1.33.0'
 
