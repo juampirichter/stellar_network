@@ -47,7 +47,7 @@
           </div>
         </div>
       </div>
-        
+
     </div>
   </div>
   <component class="component" :is="currentView" />
@@ -70,7 +70,7 @@
   }
 
   .title {
-    font-size: 40px; 
+    font-size: 40px;
     margin: 0;
     text-decoration: none;
     color: #000;
